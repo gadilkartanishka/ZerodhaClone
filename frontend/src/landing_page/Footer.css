@@ -1,0 +1,43 @@
+.smallprint {
+  list-style-type: none;
+}
+.footer-links a {
+  line-height: 2;
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+.footer-links a:hover {
+  color: #387ed1;
+}
+.fa-brands {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+.fa-brands:hover {
+  color: #387ed1;
+}
+.footer-para {
+  font-size: small;
+}
+.footer-conditions {
+  font-size: 12px;
+  opacity: 0.75;
+}
+.footer-conditions a {
+  text-decoration: none;
+}
+.smallprint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  opacity: 0.75;
+}
+
+.smallprint a {
+  font-size: 12px;
+  text-decoration: none;
+  color: inherit;
+}

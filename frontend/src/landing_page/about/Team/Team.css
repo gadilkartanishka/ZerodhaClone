@@ -1,0 +1,31 @@
+.founder-image {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+}
+.founder-info {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.founder-links {
+  color: #387ed1;
+  text-decoration: none;
+}
+.founder-links:hover {
+  color: black;
+}
+.member-image {
+  height: 225px;
+  width: 225px;
+  border-radius: 50%;
+}
+.team-member {
+  display: inline-block;
+}
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.member-bio {
+  text-align: left;
+}
