@@ -1,6 +1,7 @@
 # Dependencies
 /node_modules
 **/node_modules/
+package-lock.json (optional, but keep it if you want consistent installs)
 
 # Environment variables
 .env
@@ -10,9 +11,10 @@
 .env.production.local
 
 # Build outputs
-/frontend/build/
-/backend/dist/
-/build
+dist/
+build/
+backend/dist/
+frontend/dist/
 
 # Logs
 npm-debug.log*
@@ -27,6 +29,11 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Testing
 /coverage/
