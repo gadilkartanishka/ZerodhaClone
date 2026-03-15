@@ -1,0 +1,22 @@
+.pricing-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pricing-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+.pricing-item img {
+  height: 100%;
+  width: 120px;
+  object-fit: contain;
+}
+.pricing-item p {
+  font-size: 10px;
+}
+
+.pricing-link {
+  text-decoration: none;
+}
