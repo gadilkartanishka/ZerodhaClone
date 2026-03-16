@@ -1,0 +1,17 @@
+.pricing-table {
+  border: 1px solid #ccc;
+}
+table.pricing-table tbody > tr:nth-child(even) > td {
+  background-color: #f9f9f9;
+}
+.pricing-table thead tr {
+  border-bottom: 1px solid #ccc;
+}
+table {
+  font-size: 14px;
+}
+.pricing-table td,
+.pricing-table th {
+  padding: 20px 8px;
+  color: #555555;
+}

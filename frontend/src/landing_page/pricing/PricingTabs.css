@@ -1,0 +1,37 @@
+.pricing-tabs-container {
+  width: 85%;
+  margin: auto;
+}
+
+.pricing-tabs {
+  display: flex;
+  position: relative;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 16px;
+}
+
+.pricing-tab {
+  width: 15%;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  transition: color 0.3s;
+  color: #555;
+  font-size: 20px;
+}
+
+.pricing-tab.active {
+  color: #1f75ff;
+}
+
+.pricing-tabs .slider {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 15%;
+  background-color: #1f75ff;
+  transition: transform 0.3s ease;
+}
