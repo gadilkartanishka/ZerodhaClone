@@ -1,0 +1,13 @@
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.productImg {
+  width: 200px;
+  height: 50px;
+  object-fit: contain;
+}
+.productInfo {
+  font-size: 12px;
+}

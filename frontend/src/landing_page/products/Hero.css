@@ -1,0 +1,6 @@
+.hero-link {
+  text-decoration: none;
+}
+.hero-link:hover {
+  color: black;
+}
