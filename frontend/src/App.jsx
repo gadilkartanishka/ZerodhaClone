@@ -5,6 +5,7 @@ import Navbar from "./landing_page/Navbar.jsx";
 import Footer from "./landing_page/Footer.jsx";
 import Pricing from "./landing_page/pricing/PricingPage.jsx";
 import Product from "./landing_page/products/ProductsPage.jsx";
+import SupportPage from "./landing_page/support/SupportPage.jsx";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/products" element={<Product />} />
+        <Route path="/support" element={<SupportPage />} />
       </Routes>
       <Footer />
     </>
