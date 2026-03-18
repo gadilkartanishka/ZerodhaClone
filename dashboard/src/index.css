@@ -21,7 +21,7 @@ code {
 }
 
 .content {
-  flex-basis: 68%;
+  flex-basis: 60%;
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
@@ -633,7 +633,7 @@ hr {
 }
 
 .watchlist-container {
-  flex-basis: 32%;
+  flex-basis: 40%;
   height: 100%;
   box-sizing: border-box;
   box-shadow: 0px 0px 4px 1px rgb(236, 235, 235);
@@ -761,7 +761,7 @@ hr {
 
 .watchlist-number {
   height: 6%;
-  width: 32%;
+  width: 40%;
   box-sizing: border-box;
   position: fixed;
   display: inline-flex;
