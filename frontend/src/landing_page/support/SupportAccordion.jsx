@@ -1,6 +1,6 @@
 import "./SupportAccordion.css";
 
-function SupportAccordion({ id, title, icon }) {
+function SupportAccordion({ id, title, icon, AccordionContent }) {
   const headingId = `heading-${id}`;
   const collapseId = `collapse-${id}`;
   const parentId = `accordion-${id}`;
@@ -29,7 +29,7 @@ function SupportAccordion({ id, title, icon }) {
           aria-labelledby={headingId}
           data-bs-parent={`#${parentId}`}
         >
-          <div className="accordion-body">Accordion content here...</div>
+          <div className="accordion-body">{AccordionContent}</div>
         </div>
       </div>
     </div>

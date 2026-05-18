@@ -1,9 +1,9 @@
 .accordion {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 
 .accordion-item {
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ececec;
   border-radius: 2px !important;
   overflow: hidden;
   background-color: #ffffff;
@@ -17,10 +17,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 12px 20px;
+  padding: 14px 20px;
   font-size: 15px;
   font-weight: 500;
-  color: #333333;
+  color: #424242;
   background-color: #ffffff;
   border: none;
   box-shadow: none !important;
@@ -29,8 +29,9 @@
 }
 
 .accordion-button:not(.collapsed) {
-  color: #333333;
+  color: #424242;
   background-color: #ffffff;
+  border-bottom: 1px solid #f2f2f2;
   box-shadow: none !important;
 }
 
@@ -40,8 +41,8 @@
 
 .accordion-button .chevron {
   margin-left: auto;
-  color: #999;
-  font-size: 13px;
+  color: #9b9b9b;
+  font-size: 12px;
   transition: transform 0.2s ease;
 }
 
@@ -53,18 +54,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border: 1.5px solid #387ed1;
   border-radius: 50%;
   color: #387ed1;
-  font-size: 15px;
+  font-size: 14px;
   flex-shrink: 0;
 }
 
 .accordion-body {
-  padding: 16px 20px 20px 72px;
+  padding: 12px 20px 16px 70px;
   font-size: 14px;
-  color: #666;
-  border-top: 1px solid #f0f0f0;
+  color: #387ed1;
+}
+
+.accordion-body ul {
+  list-style: disc;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.accordion-body li {
+  margin: 0;
+  padding: 7px 0;
+  line-height: 1.4;
+}
+
+.accordion-body li::marker {
+  color: #387ed1;
+}
+
+.accordion-body a {
+  color: #387ed1;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.accordion-body a:hover {
+  color: #275ea8;
+}
+
+@media (max-width: 768px) {
+  .accordion-button {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .accordion-body {
+    padding: 10px 14px 14px 58px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
 }

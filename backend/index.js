@@ -171,6 +171,16 @@ app.get("/addpositions", async (req, res) => {
   });
   res.send("done");
 });
+
+app.get("/allholdings", async (req, res) => {
+  try {
+    const allHoldings = await HoldingsModel.find({});
+    res.json(allHoldings);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch holdings" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
 });
