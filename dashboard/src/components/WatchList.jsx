@@ -144,9 +144,10 @@ const WatchListActions = ({ uid }) => {
           placement="top"
           arrow
           TransitionComponent={Grow}
-          onClick={handleBuyClick}
         >
-          <button className="buy">Buy</button>
+          <button className="buy" onClick={handleBuyClick}>
+            Buy
+          </button>
         </Tooltip>
         <Tooltip
           title="Sell (S)"
