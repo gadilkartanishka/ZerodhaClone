@@ -6,10 +6,19 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/orders")
-      .then((res) => setOrders(res.data))
-      .catch((error) => console.error("Failed to fetch orders:", error));
+    const fetchOrders = () => {
+      axios
+        .get("http://localhost:3000/orders")
+        .then((res) => setOrders(res.data))
+        .catch((error) => console.error("Failed to fetch orders:", error));
+    };
+
+    fetchOrders();
+    window.addEventListener("orders:changed", fetchOrders);
+
+    return () => {
+      window.removeEventListener("orders:changed", fetchOrders);
+    };
   }, []);
 
   if (!orders.length) {

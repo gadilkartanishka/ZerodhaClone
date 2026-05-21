@@ -6,9 +6,18 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/getholdings").then((res) => {
-      setAllHoldings(res.data);
-    });
+    const fetchHoldings = () => {
+      axios.get("http://localhost:3000/getholdings").then((res) => {
+        setAllHoldings(res.data);
+      });
+    };
+
+    fetchHoldings();
+    window.addEventListener("holdings:changed", fetchHoldings);
+
+    return () => {
+      window.removeEventListener("holdings:changed", fetchHoldings);
+    };
   }, []);
   const labels = allHoldings.map((subArray) => subArray["name"]);
 
