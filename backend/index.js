@@ -2,16 +2,27 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3000;
 const url = process.env.MONGO_URL;
 mongoose.connect(url).then(() => console.log("database connected"));
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrderModel } = require("./model/OrdersModel");
+const authRoute = require("./routes/AuthRoute");
+const { requireAuth } = require("./middlewares/AuthMiddleware");
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+    credentials: true,
+  })
+);
 app.use(express.json());
-app.get("/addholdings", async (req, res) => {
+app.use(cookieParser());
+app.use("/", authRoute);
+
+app.get("/addholdings", requireAuth, async (req, res) => {
   let tempHoldings = [
     {
       name: "BHARTIARTL",
@@ -137,7 +148,7 @@ app.get("/addholdings", async (req, res) => {
   });
   res.send("DONE");
 });
-app.get("/addpositions", async (req, res) => {
+app.get("/addpositions", requireAuth, async (req, res) => {
   let tempPositions = [
     {
       product: "CNC",
@@ -176,7 +187,7 @@ app.get("/addpositions", async (req, res) => {
   res.send("done");
 });
 
-app.get("/allholdings", async (req, res) => {
+app.get("/allholdings", requireAuth, async (req, res) => {
   try {
     const allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
@@ -184,15 +195,15 @@ app.get("/allholdings", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch holdings" });
   }
 });
-app.get("/getholdings", async (req, res) => {
+app.get("/getholdings", requireAuth, async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
   res.json(allHoldings);
 });
-app.get("/getpositions", async (req, res) => {
+app.get("/getpositions", requireAuth, async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
 });
-app.post("/newOrder", async (req, res) => {
+app.post("/newOrder", requireAuth, async (req, res) => {
   try {
     const name = req.body.name;
     const qty = Number(req.body.qty);
@@ -200,7 +211,9 @@ app.post("/newOrder", async (req, res) => {
     const mode = String(req.body.mode || "BUY").toUpperCase();
 
     if (!name || !Number.isFinite(qty) || qty <= 0) {
-      return res.status(400).json({ error: "Valid stock name and quantity are required" });
+      return res
+        .status(400)
+        .json({ error: "Valid stock name and quantity are required" });
     }
 
     if (!Number.isFinite(price) || price < 0) {
@@ -275,7 +288,7 @@ app.post("/newOrder", async (req, res) => {
   }
 });
 
-app.get("/orders", async (req, res) => {
+app.get("/orders", requireAuth, async (req, res) => {
   try {
     const allOrders = await OrderModel.find({});
     res.json(allOrders);
