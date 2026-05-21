@@ -194,16 +194,81 @@ app.get("/getpositions", async (req, res) => {
 });
 app.post("/newOrder", async (req, res) => {
   try {
-    console.log("POST /newOrder body:", req.body);
+    const name = req.body.name;
+    const qty = Number(req.body.qty);
+    const price = Number(req.body.price);
+    const mode = String(req.body.mode || "BUY").toUpperCase();
+
+    if (!name || !Number.isFinite(qty) || qty <= 0) {
+      return res.status(400).json({ error: "Valid stock name and quantity are required" });
+    }
+
+    if (!Number.isFinite(price) || price < 0) {
+      return res.status(400).json({ error: "Valid price is required" });
+    }
+
+    if (!["BUY", "SELL"].includes(mode)) {
+      return res.status(400).json({ error: "Order mode must be BUY or SELL" });
+    }
+
+    let updatedHolding = null;
+
+    if (mode === "BUY") {
+      const holding = await HoldingsModel.findOne({ name });
+
+      if (holding) {
+        const currentValue = holding.avg * holding.qty;
+        const buyValue = price * qty;
+        const newQty = holding.qty + qty;
+
+        holding.qty = newQty;
+        holding.avg = (currentValue + buyValue) / newQty;
+        holding.price = price;
+        updatedHolding = await holding.save();
+      } else {
+        updatedHolding = await HoldingsModel.create({
+          name,
+          qty,
+          avg: price,
+          price,
+          net: "0.00%",
+          day: "0.00%",
+        });
+      }
+    }
+
+    if (mode === "SELL") {
+      const holding = await HoldingsModel.findOne({ name });
+
+      if (!holding) {
+        return res.status(404).json({ error: "Holding not found" });
+      }
+
+      if (holding.qty < qty) {
+        return res.status(400).json({ error: "Not enough quantity to sell" });
+      }
+
+      holding.qty -= qty;
+
+      if (holding.qty === 0) {
+        await HoldingsModel.deleteOne({ _id: holding._id });
+      } else {
+        updatedHolding = await holding.save();
+      }
+    }
+
     const newOrder = new OrderModel({
-      name: req.body.name,
-      qty: req.body.qty,
-      price: req.body.price,
-      mode: req.body.mode,
+      name,
+      qty,
+      price,
+      mode,
     });
     const savedOrder = await newOrder.save();
-    console.log("saved order id:", savedOrder._id);
-    res.status(201).json(savedOrder);
+
+    res.status(201).json({
+      order: savedOrder,
+      holding: updatedHolding,
+    });
   } catch (error) {
     console.error("Failed to save order:", error);
     res.status(500).json({ error: "Failed to save order" });
