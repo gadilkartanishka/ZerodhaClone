@@ -4,7 +4,7 @@ import axios from "axios";
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3000/getpositions").then((res) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/getpositions`).then((res) => {
       setAllPositions(res.data);
     });
   }, []);

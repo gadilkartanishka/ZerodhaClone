@@ -8,7 +8,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = () => {
       axios
-        .get("http://localhost:3000/orders")
+        .get(`${import.meta.env.VITE_API_URL}/orders`)
         .then((res) => setOrders(res.data))
         .catch((error) => console.error("Failed to fetch orders:", error));
     };

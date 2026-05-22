@@ -7,7 +7,7 @@ const Holdings = () => {
 
   useEffect(() => {
     const fetchHoldings = () => {
-      axios.get("http://localhost:3000/getholdings").then((res) => {
+      axios.get(`${import.meta.env.VITE_API_URL}/getholdings`).then((res) => {
         setAllHoldings(res.data);
       });
     };

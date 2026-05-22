@@ -18,18 +18,21 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
       setErrorMessage("");
       setIsSubmitting(true);
 
-      const response = await axios.post("http://localhost:3000/newOrder", {
-        name: uid,
-        qty: Number(stockQuantity),
-        price: Number(stockPrice),
-        mode,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/newOrder`,
+        {
+          name: uid,
+          qty: Number(stockQuantity),
+          price: Number(stockPrice),
+          mode,
+        },
+      );
 
       window.dispatchEvent(
-        new CustomEvent("orders:changed", { detail: response.data })
+        new CustomEvent("orders:changed", { detail: response.data }),
       );
       window.dispatchEvent(
-        new CustomEvent("holdings:changed", { detail: response.data })
+        new CustomEvent("holdings:changed", { detail: response.data }),
       );
 
       generalContext.closeBuyWindow();
@@ -86,7 +89,11 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
           >
             {isSubmitting ? "Placing..." : mode === "SELL" ? "Sell" : "Buy"}
           </button>
-          <button type="button" className="btn btn-grey" onClick={handleCancelClick}>
+          <button
+            type="button"
+            className="btn btn-grey"
+            onClick={handleCancelClick}
+          >
             Cancel
           </button>
         </div>
