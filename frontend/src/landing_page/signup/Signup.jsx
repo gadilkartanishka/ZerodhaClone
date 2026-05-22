@@ -32,11 +32,11 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/signup",
+        `${import.meta.env.VITE_API_URL}/signup`,
         {
           ...inputValue,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       const { success, message } = data;
       if (success) {
@@ -50,7 +50,8 @@ const Signup = () => {
       }
     } catch (error) {
       console.log(error);
-      const errorMessage = error.response?.data?.message || "An error occurred during signup";
+      const errorMessage =
+        error.response?.data?.message || "An error occurred during signup";
       handleError(errorMessage);
     }
     setInputValue({

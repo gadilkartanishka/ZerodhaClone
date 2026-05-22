@@ -31,11 +31,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/login",
+        `${import.meta.env.VITE_API_URL}/login`,
         {
           ...inputValue,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       const { success, message } = data;
       if (success) {
@@ -49,7 +49,8 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      const errorMessage = error.response?.data?.message || "An error occurred during login";
+      const errorMessage =
+        error.response?.data?.message || "An error occurred during login";
       handleError(errorMessage);
     }
     setInputValue({
