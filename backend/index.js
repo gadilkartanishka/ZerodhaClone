@@ -6,7 +6,9 @@ const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URL).then(() => console.log("database connected"));
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("database connected"));
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
@@ -16,10 +18,17 @@ const { requireAuth } = require("./middlewares/AuthMiddleware");
 
 const app = express();
 
-app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://zerodha-clone-dzdk.vercel.app", // frontend
+      "https://zerodha-clone-dashboard.vercel.app", // dashboard
+    ],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", authRoute);
@@ -89,7 +98,12 @@ app.post("/newOrder", requireAuth, async (req, res) => {
       updatedHolding = await holding.save();
     } else {
       updatedHolding = await HoldingsModel.create({
-        name, qty, avg: price, price, net: "0.00%", day: "0.00%",
+        name,
+        qty,
+        avg: price,
+        price,
+        net: "0.00%",
+        day: "0.00%",
       });
     }
   }
