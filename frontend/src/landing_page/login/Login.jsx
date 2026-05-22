@@ -42,7 +42,7 @@ const Login = () => {
         handleSuccess(message);
         setTimeout(() => {
           // Redirect to the dashboard
-          window.location.href = "http://localhost:5173";
+          window.location.href = "https://zerodha-clone-djof.vercel.app/";
         }, 1000);
       } else {
         handleError(message);
